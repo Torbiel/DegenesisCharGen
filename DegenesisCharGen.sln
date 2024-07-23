@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35027.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DegenesisCharGen", "DegenesisCharGen\DegenesisCharGen\DegenesisCharGen.csproj", "{AE3B3B54-4EF1-41C5-9A36-EC45FD9F5E86}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DegenesisCharGen.Android", "DegenesisCharGen\DegenesisCharGen.Android\DegenesisCharGen.Android.csproj", "{60EFB072-B1BC-4A1A-A7FA-E54C150ABECA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DegenesisCharGen.Desktop", "DegenesisCharGen\DegenesisCharGen.Desktop\DegenesisCharGen.Desktop.csproj", "{FE17A53F-E11F-4615-B197-950413A0414B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DegenesisCharGen.iOS", "DegenesisCharGen\DegenesisCharGen.iOS\DegenesisCharGen.iOS.csproj", "{F6C1C88C-0F3F-4A47-A30F-41172477F95A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DegenesisCharGen.Browser", "DegenesisCharGen\DegenesisCharGen.Browser\DegenesisCharGen.Browser.csproj", "{954EBB89-8B62-43E3-B35F-2CBFB81DEDA4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AE3B3B54-4EF1-41C5-9A36-EC45FD9F5E86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE3B3B54-4EF1-41C5-9A36-EC45FD9F5E86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE3B3B54-4EF1-41C5-9A36-EC45FD9F5E86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE3B3B54-4EF1-41C5-9A36-EC45FD9F5E86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60EFB072-B1BC-4A1A-A7FA-E54C150ABECA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60EFB072-B1BC-4A1A-A7FA-E54C150ABECA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60EFB072-B1BC-4A1A-A7FA-E54C150ABECA}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{60EFB072-B1BC-4A1A-A7FA-E54C150ABECA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60EFB072-B1BC-4A1A-A7FA-E54C150ABECA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60EFB072-B1BC-4A1A-A7FA-E54C150ABECA}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{FE17A53F-E11F-4615-B197-950413A0414B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE17A53F-E11F-4615-B197-950413A0414B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE17A53F-E11F-4615-B197-950413A0414B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE17A53F-E11F-4615-B197-950413A0414B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6C1C88C-0F3F-4A47-A30F-41172477F95A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6C1C88C-0F3F-4A47-A30F-41172477F95A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6C1C88C-0F3F-4A47-A30F-41172477F95A}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{F6C1C88C-0F3F-4A47-A30F-41172477F95A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6C1C88C-0F3F-4A47-A30F-41172477F95A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6C1C88C-0F3F-4A47-A30F-41172477F95A}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{954EBB89-8B62-43E3-B35F-2CBFB81DEDA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{954EBB89-8B62-43E3-B35F-2CBFB81DEDA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{954EBB89-8B62-43E3-B35F-2CBFB81DEDA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{954EBB89-8B62-43E3-B35F-2CBFB81DEDA4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CB3F750E-5A1E-4345-A323-BE251AE5BD48}
+	EndGlobalSection
+EndGlobal
