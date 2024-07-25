@@ -2,15 +2,187 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:vm="clr-namespace:DegenesisCharGen.ViewModels"
+             xmlns:local="clr-namespace:DegenesisCharGen.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="DegenesisCharGen.Views.MainView"
-             x:DataType="vm:MainViewModel">
-  <Design.DataContext>
-    <!-- This only sets the DataContext for the previewer in an IDE,
-         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-    <vm:MainViewModel />
-  </Design.DataContext>
+             x:DataType="local:MainViewModel"
+             Background="Black">
+  <UserControl.DataContext>
+    <local:MainViewModel />
+  </UserControl.DataContext>
+  <UserControl.Styles>
+    <Style Selector="TextBlock">
+      <Setter Property="Foreground" Value="White"/>
+    </Style>
+    <Style Selector="TextBox">
+      <Setter Property="Background" Value="Black"/>
+      <Setter Property="Foreground" Value="White"/>
+      <Setter Property="BorderBrush" Value="DarkGray"/>
+      <Setter Property="CornerRadius" Value="0"/>
+      <Setter Property="BorderThickness" Value="2"/>
+    </Style>
+    <Style Selector="TextBox:pointerover">
+      <Setter Property="BorderBrush" Value="White"/>
+    </Style>
+    <Style Selector="Button">
+      <Setter Property="Background" Value="Black"/>
+      <Setter Property="Foreground" Value="White"/>
+      <Setter Property="BorderBrush" Value="DarkGray"/>
+      <Setter Property="CornerRadius" Value="0"/>
+      <Setter Property="BorderThickness" Value="2"/>
+    </Style>
+    <Style Selector="Button:pointerover">
+      <Setter Property="BorderBrush" Value="White"/>
+    </Style>
+    <Style Selector="CheckBox">
+      <Setter Property="Background" Value="Black"/>
+      <Setter Property="Foreground" Value="White"/>
+      <Setter Property="BorderBrush" Value="DarkGray"/>
+      <Setter Property="CornerRadius" Value="0"/>
+      <Setter Property="BorderThickness" Value="2"/>
+      <Setter Property="Margin" Value="2"/>
+    </Style>
+    <Style Selector="CheckBox:pointerover">
+      <Setter Property="BorderBrush" Value="White"/>
+    </Style>
+    <Style Selector="CheckBox:checked">
+      <Setter Property="Background" Value="Red"/>
+      <Setter Property="BorderBrush" Value="Red"/>
+    </Style>
+  </UserControl.Styles>
 
-  <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+
+    <!-- First row: Inputs for Name, Age, Sex, Height, Weight, Money -->
+    <Grid Grid.Row="0" Margin="10">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+
+      <TextBox Text="{Binding Character.Name}" Grid.Column="0" Watermark="Name" Margin="5"/>
+      <TextBox Text="{Binding Character.Age}" Grid.Column="1" Watermark="Age" Margin="5"/>
+      <TextBox Text="{Binding Character.Sex}" Grid.Column="2" Watermark="Sex" Margin="5"/>
+      <TextBox Text="{Binding Character.Height}" Grid.Column="3" Watermark="Height" Margin="5"/>
+      <TextBox Text="{Binding Character.Weight}" Grid.Column="4" Watermark="Weight" Margin="5"/>
+      <TextBox Text="{Binding Character.Money}" Grid.Column="5" Watermark="Money" Margin="5"/>
+    </Grid>
+
+    <!-- Second row: Culture, Cult, Concept -->
+    <Grid Grid.Row="1" Margin="10">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+
+      <ComboBox ItemsSource="{Binding Cultures}" SelectedItem="{Binding Character.Culture}" Grid.Column="0">
+        <ComboBox.ItemTemplate>
+          <DataTemplate>
+            <TextBlock Text="{Binding Name}" />
+          </DataTemplate>
+        </ComboBox.ItemTemplate>
+      </ComboBox>
+      
+      <ComboBox ItemsSource="{Binding Cults}" SelectedItem="{Binding Character.Cult}" Grid.Column="1">
+        <ComboBox.ItemTemplate>
+          <DataTemplate>
+            <TextBlock Text="{Binding Name}" />
+          </DataTemplate>
+        </ComboBox.ItemTemplate>
+      </ComboBox>
+
+      <ComboBox ItemsSource="{Binding Concepts}" SelectedItem="{Binding Character.Concept}" Grid.Column="2">
+        <ComboBox.ItemTemplate>
+          <DataTemplate>
+            <TextBlock Text="{Binding Name}" />
+          </DataTemplate>
+        </ComboBox.ItemTemplate>
+      </ComboBox>
+    </Grid>
+
+    <!-- Third row: Attribute and Skill points summary-->
+    <Grid Grid.Row="2" Margin="10">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+
+      <TextBlock Grid.Column="0">
+        <Run Text="Attributes: " />
+        <Run Text="{Binding AttributePoints}" />
+        <Run Text=" / " />
+        <Run Text="{Binding MaxAttributePoints}" />
+      </TextBlock>
+
+      <TextBlock Grid.Column="1">
+        <Run Text="Skills: " />
+        <Run Text="{Binding SkillPoints}" />
+        <Run Text=" / " />
+        <Run Text="{Binding MaxSkillPoints}" />
+      </TextBlock>
+    </Grid>
+    
+    <!-- Fourth and fifth rows: Attributes -->
+    <Grid Grid.Row="3" Margin="10">
+      <ItemsControl ItemsSource="{Binding Character.Attributes}">
+        <ItemsControl.ItemsPanel>
+          <ItemsPanelTemplate>
+            <UniformGrid Rows="2" Columns="3" />
+          </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+          <DataTemplate>
+            <StackPanel Margin="5">
+              <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="{Binding Name}" FontWeight="Bold"/>
+                <RadioButton IsChecked="{Binding Value, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=1}"/>
+                <RadioButton IsChecked="{Binding Value, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=2}"/>
+                <RadioButton IsChecked="{Binding Value, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=3}"/>
+                <RadioButton IsChecked="{Binding Value, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=4}"/>
+                <RadioButton IsChecked="{Binding Value, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=5}"/>
+                <RadioButton IsChecked="{Binding Value, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=6}"/>
+              </StackPanel>
+              <ItemsControl ItemsSource="{Binding Skills}">
+                <ItemsControl.ItemTemplate>
+                  <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Margin="2">
+                      <TextBlock Text="{Binding Name}" />
+                      <RadioButton IsChecked="{Binding Value, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=1}"/>
+                      <RadioButton IsChecked="{Binding Value, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=2}"/>
+                      <RadioButton IsChecked="{Binding Value, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=3}"/>
+                      <RadioButton IsChecked="{Binding Value, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=4}"/>
+                      <RadioButton IsChecked="{Binding Value, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=5}"/>
+                      <RadioButton IsChecked="{Binding Value, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=6}"/>
+                    </StackPanel>
+                  </DataTemplate>
+                </ItemsControl.ItemTemplate>
+              </ItemsControl>
+            </StackPanel>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+    </Grid>
+
+    <Grid Grid.Row="4">
+      
+    </Grid>
+
+    <Button Content="Export to PDF" Command="{Binding ExportToPdfCommand}" Grid.Row="5" Margin="10" HorizontalAlignment="Center"/>
+    <TextBlock Text="{Binding Character.Attributes[0].Value}" Grid.Row="6"></TextBlock>
+  </Grid>
 </UserControl>

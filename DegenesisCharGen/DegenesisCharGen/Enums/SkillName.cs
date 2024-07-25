@@ -1,0 +1,42 @@
+﻿namespace DegenesisCharGen.Enums
+{
+    public enum SkillName
+    {
+        Athletics,
+        Brawl,
+        Force,
+        Melee,
+        Stamina,
+        Toughness,
+        Crafting,
+        Dexterity,
+        Navigation,
+        Mobility,
+        Projectiles,
+        Stealth,
+        Arts,
+        Conduct,
+        Expression,
+        Leadership,
+        Negotiation,
+        Seduction,
+        ArtifactLore,
+        Engineering,
+        Focus,
+        Legends,
+        Medicine,
+        Science,
+        Cunning,
+        Deception,
+        Domination,
+        Faith,
+        Reaction,
+        Willpower,
+        Empathy,
+        Orienteering,
+        Perception,
+        Primal,
+        Survival,
+        Taming
+    }
+}
