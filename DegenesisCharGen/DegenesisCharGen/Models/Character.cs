@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using DegenesisCharGen.Abstractions;
 using DegenesisCharGen.Enums;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace DegenesisCharGen.Models;
 
@@ -119,4 +121,70 @@ public partial class Character : ObservableObject
             ]
         }
     ];
+
+    partial void OnCultureChanged(Culture? oldValue, Culture? newValue)
+    {
+        ChangeMaxes(oldValue, newValue);
+    }
+
+    partial void OnCultChanged(Cult? oldValue, Cult? newValue)
+    {
+        ChangeMaxes(oldValue, newValue);
+    }
+
+    partial void OnConceptChanged(Concept? oldValue, Concept? newValue)
+    {
+        ChangeMaxes(oldValue, newValue);
+    }
+
+    private void ChangeMaxes(ICharacteristic? oldValue, ICharacteristic? newValue)
+    {
+        if (oldValue is not null)
+        {
+            DecrementOldMaxes(oldValue);
+        }
+
+        if (newValue is not null)
+        {
+            IncrementNewMaxes(newValue);
+        }
+    }
+
+    private void DecrementOldMaxes(ICharacteristic characteristic)
+    {
+        foreach (var attributeName in characteristic.Attributes)
+        {
+            var characterAttribute = Attributes.First(x => x.Name == attributeName);
+            characterAttribute.Max--;
+
+            if (characterAttribute.Value > characterAttribute.Max)
+            {
+                characterAttribute.Value = characterAttribute.Max;
+            }
+        }
+
+        foreach (var skillName in characteristic.Skills)
+        {
+            var characterSkill = Attributes.SelectMany(x => x.Skills).First(x => x.Name == skillName);
+            characterSkill.Max--;
+
+            if (characterSkill.Value > characterSkill.Max)
+            {
+                characterSkill.Value = characterSkill.Max;
+            }
+        }
+    }
+
+    private void IncrementNewMaxes(ICharacteristic characteristic)
+    {
+        foreach (var attributeName in characteristic.Attributes)
+        {
+            Attributes.First(x => x.Name == attributeName).Max++;
+        }
+
+        foreach (var skillname in characteristic.Skills)
+        {
+            Attributes.SelectMany(x => x.Skills).First(x => x.Name == skillname).Max++;
+        }
+    }
 }
