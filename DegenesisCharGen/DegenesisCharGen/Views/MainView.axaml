@@ -5,11 +5,7 @@
              xmlns:local="clr-namespace:DegenesisCharGen.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="DegenesisCharGen.Views.MainView"
-             x:DataType="local:MainViewModel"
              Background="Black">
-  <UserControl.DataContext>
-    <local:MainViewModel />
-  </UserControl.DataContext>
   <UserControl.Styles>
     <Style Selector="TextBlock">
       <Setter Property="Foreground" Value="White"/>
@@ -149,25 +145,17 @@
           <DataTemplate>
             <StackPanel Margin="5">
               <StackPanel Orientation="Horizontal" Margin="5">
-                <TextBlock Text="{Binding Name}" FontWeight="Bold"/>
-                <RadioButton IsChecked="{Binding Value, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=1}"/>
-                <RadioButton IsChecked="{Binding Value, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=2}"/>
-                <RadioButton IsChecked="{Binding Value, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=3}"/>
-                <RadioButton IsChecked="{Binding Value, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=4}"/>
-                <RadioButton IsChecked="{Binding Value, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=5}"/>
-                <RadioButton IsChecked="{Binding Value, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=6}"/>
+                <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="18" />
+                <NumericUpDown Minimum="1" Maximum="{Binding Max}" Value="{Binding Value, Mode=TwoWay}" IsEnabled="{Binding DataContext.HasAttributePoints, RelativeSource={RelativeSource AncestorType=UserControl}}" Margin="10,0,0,0"></NumericUpDown>
+                <!--<RadioButton IsChecked="{Binding Value, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=1}"/>-->
               </StackPanel>
               <ItemsControl ItemsSource="{Binding Skills}">
                 <ItemsControl.ItemTemplate>
                   <DataTemplate>
                     <StackPanel Orientation="Horizontal" Margin="2">
-                      <TextBlock Text="{Binding Name}" />
-                      <RadioButton IsChecked="{Binding Value, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=1}"/>
-                      <RadioButton IsChecked="{Binding Value, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=2}"/>
-                      <RadioButton IsChecked="{Binding Value, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=3}"/>
-                      <RadioButton IsChecked="{Binding Value, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=4}"/>
-                      <RadioButton IsChecked="{Binding Value, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=5}"/>
-                      <RadioButton IsChecked="{Binding Value, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=6}"/>
+                      <TextBlock Text="{Binding Name}" Margin="5" />
+                      <NumericUpDown Minimum="0" Maximum="{Binding Max}" Value="{Binding Value, Mode=TwoWay}" IsEnabled="{Binding DataContext.HasSkillPoints, RelativeSource={RelativeSource AncestorType=UserControl}}" Margin="10,0,0,0"></NumericUpDown>
+                      <!--<RadioButton IsChecked="{Binding Value, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=1}"/>-->
                     </StackPanel>
                   </DataTemplate>
                 </ItemsControl.ItemTemplate>
@@ -183,6 +171,6 @@
     </Grid>
 
     <Button Content="Export to PDF" Command="{Binding ExportToPdfCommand}" Grid.Row="5" Margin="10" HorizontalAlignment="Center"/>
-    <TextBlock Text="{Binding Character.Attributes[0].Value}" Grid.Row="6"></TextBlock>
+    <TextBlock Text="{Binding Character.Attributes[0].Skills[0].Value}" Grid.Row="6"></TextBlock>
   </Grid>
 </UserControl>

@@ -4,9 +4,10 @@ using DegenesisCharGen.Enums;
 using DegenesisCharGen.Models;
 using PdfSharpCore.Drawing;
 using PdfSharpCore.Pdf.IO;
-using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
+using System.Linq;
 
 namespace DegenesisCharGen.ViewModels;
 
@@ -20,9 +21,13 @@ public partial class MainViewModel : ViewModelBase
     [ObservableProperty]
     private int attributePoints = 10;
     [ObservableProperty]
+    private bool hasAttributePoints;
+    [ObservableProperty]
     private int maxSkillPoints = 28;
     [ObservableProperty]
     private int skillPoints = 28;
+    [ObservableProperty]
+    private bool hasSkillPoints;
 
     public ObservableCollection<Culture> Cultures { get; set; } = [];
     public ObservableCollection<Cult> Cults { get; set; } = [];
@@ -32,6 +37,36 @@ public partial class MainViewModel : ViewModelBase
     {
         ExportToPdfCommand = new RelayCommand(ExportToPdf);
         Initialize3Cs();
+
+        HasAttributePoints = AttributePoints > 0;
+        HasSkillPoints = SkillPoints > 0;
+
+        foreach (var attribute in Character.Attributes)
+        {
+            attribute.PropertyChanged += OnAttributePropertyChanged;
+            foreach (var skill in attribute.Skills)
+            {
+                skill.PropertyChanged += OnSkillPropertyChanged;
+            }
+        }
+    }
+
+    private void OnAttributePropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(Attribute.Value))
+        {
+            AttributePoints = MaxAttributePoints - Character.Attributes.Sum(a => a.Value) + 6;
+            HasAttributePoints = AttributePoints > 0;
+        }
+    }
+
+    private void OnSkillPropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(Skill.Value))
+        {
+            SkillPoints = MaxSkillPoints - Character.Attributes.Sum(a => a.Skills.Sum(s => s.Value));
+            HasSkillPoints = SkillPoints > 0;
+        }
     }
 
     private void Initialize3Cs()
@@ -138,7 +173,7 @@ public partial class MainViewModel : ViewModelBase
     private void ExportToPdf()
     {
         var templatePath = Path.Combine("D:\\Programowanie\\DegenesisCharGen\\DegenesisCharGen\\DegenesisCharGen\\Assets", "template.pdf");
-        var documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        var documentsPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments);
         var filename = Path.Combine(documentsPath, "CharacterData.pdf");
 
         File.Copy(templatePath, filename, true);

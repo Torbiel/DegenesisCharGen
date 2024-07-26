@@ -1,12 +1,13 @@
 using Avalonia.Controls;
+using DegenesisCharGen.ViewModels;
 
-namespace DegenesisCharGen.Views
+namespace DegenesisCharGen.Views;
+
+public partial class MainView : UserControl
 {
-    public partial class MainView : UserControl
+    public MainView()
     {
-        public MainView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+        DataContext = new MainViewModel();
     }
 }

@@ -11,7 +11,7 @@ public partial class Character : ObservableObject
     [ObservableProperty]
     public string name = "";
     [ObservableProperty]
-    public int age = 0;
+    public int age;
     [ObservableProperty]
     public string sex = "";
     [ObservableProperty]
@@ -19,7 +19,7 @@ public partial class Character : ObservableObject
     [ObservableProperty]
     public string weight = "";
     [ObservableProperty]
-    public int money = 0;
+    public int money;
 
     [ObservableProperty]
     public Culture? culture = null;
@@ -33,8 +33,8 @@ public partial class Character : ObservableObject
         new Attribute
         {
             Name = AttributeName.Body,
-            Max = 2,
-            Value = 0,
+            Max = 3,
+            Value = 1,
             Skills =
             [
                 new Skill { Name = SkillName.Athletics, Attribute = AttributeName.Body, Max = 2, Value = 0 },
@@ -48,8 +48,8 @@ public partial class Character : ObservableObject
         new Attribute
         {
             Name = AttributeName.Agility,
-            Max = 2,
-            Value = 0,
+            Max = 3,
+            Value = 1,
             Skills =
             [
                 new Skill { Name = SkillName.Crafting, Attribute = AttributeName.Agility, Max = 2, Value = 0 },
@@ -63,8 +63,8 @@ public partial class Character : ObservableObject
         new Attribute
         {
             Name = AttributeName.Charisma,
-            Max = 2,
-            Value = 0,
+            Max = 3,
+            Value = 1,
             Skills =
             [
                 new Skill { Name = SkillName.Arts, Attribute = AttributeName.Charisma, Max = 2, Value = 0 },
@@ -78,8 +78,8 @@ public partial class Character : ObservableObject
         new Attribute
         {
             Name = AttributeName.Intellect,
-            Max = 2,
-            Value = 0,
+            Max = 3,
+            Value = 1,
             Skills =
             [
                 new Skill { Name = SkillName.ArtifactLore, Attribute = AttributeName.Intellect, Max = 2, Value = 0 },
@@ -93,8 +93,8 @@ public partial class Character : ObservableObject
         new Attribute
         {
             Name = AttributeName.Psyche,
-            Max = 2,
-            Value = 0,
+            Max = 3,
+            Value = 1,
             Skills =
             [
                 new Skill { Name = SkillName.Cunning, Attribute = AttributeName.Psyche, Max = 2, Value = 0 },
@@ -108,8 +108,8 @@ public partial class Character : ObservableObject
         new Attribute
         {
             Name = AttributeName.Instinct,
-            Max = 2,
-            Value = 0,
+            Max = 3,
+            Value = 1,
             Skills =
             [
                 new Skill { Name = SkillName.Empathy, Attribute = AttributeName.Instinct, Max = 2, Value = 0 },
